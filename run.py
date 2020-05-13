@@ -66,10 +66,13 @@ def word_embedding(tokens):
     Args:
         tokens (list): 斷詞的tokens
     """
-    model = FastText(tokens, min_count=1, size=3)
+    # input must be 2D even only one data
+    # tokens = [['xx', 'xxx']]
+    model = FastText([tokens], min_count=1, size=3)
     get_vector = model.wv['半導體']
     model.save('./data/wb.model')
     print(get_vector)
+    print(model.wv.vocab)
 
 
 def main():
@@ -97,7 +100,7 @@ def main():
 
     # 計算tf
     count = Counter(tokens)
-    print(count)
+    # print(count)
 
     # 執行word cloud
     word_cloud(tokens)
